@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-del
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+    namespace: test
+  project: default
+  source:
+    repoURL: https://github.com/gmclk/argo-del
+    path: .
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
